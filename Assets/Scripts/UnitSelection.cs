@@ -38,6 +38,13 @@ public class UnitSelection : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 100, UnitLayerMask))
         {
             Unit unit = hit.collider.GetComponent<Unit>();
+
+            if (_player.isMyUnit(unit))
+            {
+                selectedUnits.Add(unit);
+                unit.ToggleSelectionVisual(true);
+            }
+                
         }
     }
 
