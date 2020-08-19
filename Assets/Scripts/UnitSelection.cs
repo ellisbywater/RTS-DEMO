@@ -102,4 +102,15 @@ public class UnitSelection : MonoBehaviour
             }
         }
     }
+    
+    // returns whether or not we are selecting a unit or units
+    public bool HasUnitSelected()
+    {
+        return selectedUnits.Count > 0 ? true : false;
+    }
+
+    public Unit[] GetSelectedUnits()
+    {
+        return selectedUnits.ToArray();
+    }
 }
