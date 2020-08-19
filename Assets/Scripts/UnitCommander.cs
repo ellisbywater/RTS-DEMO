@@ -33,6 +33,7 @@ public class UnitCommander : MonoBehaviour
                 if (hit.collider.CompareTag("Ground"))
                 {
                     UnitsMoveToPosition(hit.point, selectedUnits);
+                    CreateSelectionMarker(hit.point);
                 }
             }
         }
@@ -40,9 +41,16 @@ public class UnitCommander : MonoBehaviour
 
     void UnitsMoveToPosition(Vector3 movePosition, Unit[] units)
     {
+        Vector3[] destinations = UnitMover.GetUnitGroupDestinations(movePosition, units.Length, 2); 
         for (int x = 0; x < units.Length; x++)
         {
-            units[x].MoveToPosition(movePosition);
+            units[x].MoveToPosition(destinations[x]);
         }
+    }
+
+    // creates a new selection marker visual
+    void CreateSelectionMarker(Vector3 pos)
+    {
+        Instantiate(selectionMarkerPrefab, new Vector3(pos.x, 0.1f, pos.z), Quaternion.identity);
     }
 }
